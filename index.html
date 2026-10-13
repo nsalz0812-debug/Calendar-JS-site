@@ -4,113 +4,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>紫霞雪影 · 2027 冊曆 </title>
+<title>紫霞雪影 · 2027 冊曆</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#fbf8f1;color:#39352f;font-family:"Noto Serif KR",serif}
-.cover{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(135deg,#f8f4eb,#fffdf8,#f0ece2);border:12px double #d9c7a5}
-.cover small{letter-spacing:5px;color:#a49a87}
-.cover h1{font-size:clamp(38px,10vw,70px);letter-spacing:8px;margin:28px 0 10px}
-.cover p{color:#bca06b;letter-spacing:5px}
-button{font:inherit;cursor:pointer}
-.cover button{margin:12px;padding:12px 22px;background:#fffdf8;border:1px solid #cdbb98;color:#7d7669}
-main{max-width:1100px;margin:auto;padding:32px 18px}
-h2{font-size:32px;font-weight:400}
-.intro{color:#777568;line-height:1.8}
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{min-width:0;cursor:pointer}
-.art{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid #e5dfd2;padding:12px;text-align:center;overflow:hidden}
-.art .symbol{font-size:clamp(42px,9vw,90px);margin:12px 0}
-.art small{letter-spacing:2px;font-size:9px}
-.art strong{font-size:clamp(15px,3vw,25px);font-weight:400;letter-spacing:2px}
-.caption{padding:10px 2px;color:#777568;font-size:13px}
-.card:nth-child(6n+1) .art{background:#d7e1d0}
-.card:nth-child(6n+2) .art{background:#e9d7d2}
-.card:nth-child(6n+3) .art{background:#d9e5e5}
-.card:nth-child(6n+4) .art{background:#ead7b9}
-.card:nth-child(6n+5) .art{background:#e2e5c9}
-.card:nth-child(6n) .art{background:#d5e2e9}
-.bonus{margin-top:60px;padding:30px 0;border-top:1px solid #e5dfd2}
-#modal{display:none;position:fixed;inset:0;background:#26251fee;z-index:5;align-items:center;justify-content:center;padding:20px}
-#modal.show{display:flex}
-.modalbox{width:min(100%,400px);padding:22px;background:#fbf8f1;text-align:center}
-.modalbox .art{min-height:45vh}
-.modalbox button{padding:10px 16px;margin:12px 5px;border:1px solid #cdbb98;background:#fffdf8}
-footer{margin-top:40px;padding:20px 0;border-top:1px solid #e5dfd2;color:#777568;font-size:11px}
-@media(max-width:560px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}main{padding:24px 14px}.cover{border-width:6px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fbf8f1;
+  color: #39352f;
+  font-family: "Noto Serif KR", serif;
+}
+
+.cover {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8f4eb, #fffdf8, #f0ece2);
+  border: 12px double #d9c7a5;
+}
+
+.cover small {
+  letter-spacing: 5px;
+  color: #a49a87;
+}
+
+.cover h1 {
+  font-size: clamp(38px, 10vw, 70px);
+  letter-spacing: 8px;
+  margin: 28px 0 10px;
+}
+
+.cover p {
+  color: #bca06b;
+  letter-spacing: 5px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.cover button {
+  margin: 12px;
+  padding: 12px 22px;
+  background: #fffdf8;
+  border: 1px solid #cdbb98;
+  color: #7d7669;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 32px 18px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.intro {
+  color: #777568;
+  line-height: 1.8;
+}
+
+/* 가로형 그림: 한 줄에 하나씩 */
+.gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+  margin-top: 28px;
+}
+
+.card {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.art {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #e5dfd2;
+  padding: 12px;
+  text-align: center;
+  overflow: hidden;
+  background: #f0ece2;
+}
+
+/* 실제 그림 이미지 */
+.art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.art .symbol {
+  font-size: clamp(42px, 9vw, 90px);
+  margin: 12px 0;
+}
+
+.art small {
+  letter-spacing: 2px;
+  font-size: 9px;
+}
+
+.art strong {
+  font-size: clamp(15px, 3vw, 25px);
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.caption {
+  padding: 10px 2px;
+  color: #777568;
+  font-size: 13px;
+}
+
+/* 그림을 넣기 전 샘플 배경 */
+.card:nth-child(6n+1) .art { background: #d7e1d0; }
+.card:nth-child(6n+2) .art { background: #e9d7d2; }
+.card:nth-child(6n+3) .art { background: #d9e5e5; }
+.card:nth-child(6n+4) .art { background: #ead7b9; }
+.card:nth-child(6n+5) .art { background: #e2e5c9; }
+.card:nth-child(6n) .art { background: #d5e2e9; }
+
+.bonus {
+  margin-top: 60px;
+  padding: 30px 0;
+  border-top: 1px solid #e5dfd2;
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #26251fee;
+  z-index: 5;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#modal.show {
+  display: flex;
+}
+
+.modalbox {
+  width: min(100%, 900px);
+  max-height: 95svh;
+  overflow-y: auto;
+  padding: 16px;
+  background: #fbf8f1;
+  text-align: center;
+}
+
+.modalbox .art {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 0;
+  max-height: 72svh;
+}
+
+.modalbox button {
+  padding: 10px 16px;
+  margin: 12px 5px;
+  border: 1px solid #cdbb98;
+  background: #fffdf8;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #e5dfd2;
+  color: #777568;
+  font-size: 11px;
+}
+
+@media (max-width: 560px) {
+  main {
+    padding: 24px 14px;
+  }
+
+  .cover {
+    border-width: 6px;
+  }
+
+  .gallery {
+    gap: 22px;
+  }
+
+  .modalbox {
+    padding: 10px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <section class="cover">
-<h1>紫霞雪影</h1>
-<p>2027 冊曆 </p>
-<div>열두 달의 그림을 모아 둔 작은 기록</div>
-<button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">달력 페이지 펼쳐 보기 ↓</button>
-<button onclick="document.getElementById('bonus').scrollIntoView({behavior:'smooth'})">특전 페이지 펼쳐 보기 ↓</button>
+  <h1>紫霞雪影</h1>
+  <p>2027 冊曆</p>
+  <div>열두 달의 그림을 모아 둔 작은 기록</div>
+
+  <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+    달력 페이지 펼쳐 보기 ↓
+  </button>
+
+  <button onclick="document.getElementById('bonus').scrollIntoView({behavior:'smooth'})">
+    특전 페이지 펼쳐 보기 ↓
+  </button>
 </section>
 
 <main>
-<p>紫霞雪影 · 2027 CALENDAR</p>
-<h2>한 해의 기록.</h2>
-<p class="intro">1월부터 12월까지의 달력 페이지 미리보기입니다.<br>각 페이지를 누르면 크게 볼 수 있어요.</p>
-<section class="gallery" id="gallery"></section>
+  <p>紫霞雪影 · 2027 CALENDAR</p>
+  <h2>한 해의 기록.</h2>
 
-<section class="bonus" id="bonus">
-<p>SPECIAL BENEFIT</p>
-<h2>특전 페이지</h2>
-<p class="intro">특전 샘플을 준비하면 이곳에서 확인할 수 있습니다.</p>
-</section>
-<footer>PREVIEW ONLY · 실제 상품 사양은 판매 안내를 확인해 주세요.</footer>
+  <p class="intro">
+    1월부터 12월까지의 달력 페이지 미리보기입니다.<br>
+    각 페이지를 누르면 크게 볼 수 있어요.
+  </p>
+
+  <section class="gallery" id="gallery"></section>
+
+  <section class="bonus" id="bonus">
+    <p>SPECIAL BENEFIT</p>
+    <h2>특전 페이지</h2>
+    <p class="intro">특전 샘플을 준비하면 이곳에서 확인할 수 있습니다.</p>
+  </section>
+
+  <footer>
+    PREVIEW ONLY · 실제 상품 사양은 판매 안내를 확인해 주세요.
+  </footer>
 </main>
 
 <div id="modal" onclick="if(event.target===this)closeModal()">
-<div class="modalbox">
-<div id="large"></div>
-<button onclick="change(-1)">← 이전</button>
-<button onclick="closeModal()">닫기</button>
-<button onclick="change(1)">다음 →</button>
-</div>
+  <div class="modalbox">
+    <div id="large"></div>
+
+    <button onclick="change(-1)">← 이전</button>
+    <button onclick="closeModal()">닫기</button>
+    <button onclick="change(1)">다음 →</button>
+  </div>
 </div>
 
 <script>
-const months=[
-['1월','January','☀'],['2월','February','✿'],
-['3월','March','❀'],['4월','April','🌸'],
-['5월','May','❧'],['6월','June','☼'],
-['7월','July','☀'],['8월','August','✿'],
-['9월','September','❧'],['10월','October','🍂'],
-['11월','November','❧'],['12월','December','✧']
+const months = [
+  ['1월', 'January'],
+  ['2월', 'February'],
+  ['3월', 'March'],
+  ['4월', 'April'],
+  ['5월', 'May'],
+  ['6월', 'June'],
+  ['7월', 'July'],
+  ['8월', 'August'],
+  ['9월', 'September'],
+  ['10월', 'October'],
+  ['11월', 'November'],
+  ['12월', 'December']
 ];
-let current=0;
-function artwork(i){
-const m=months[i];
-return `<div class="art"><small>A YEAR IN PICTURES</small><div class="symbol">${m[2]}</div><strong>${m[1].toUpperCase()}</strong><p>${m[0]}</p><small>CALENDAR SAMPLE · ${String(i+1).padStart(2,'0')}</small></div>`;
+
+/*
+  실제 그림 파일명을 여기에 연결하세요.
+  예: images/01.jpg
+  파일이 없으면 샘플 안내 화면이 표시됩니다.
+*/
+const images = [
+  'images/01.jpg',
+  'images/02.jpg',
+  'images/03.jpg',
+  'images/04.jpg',
+  'images/05.jpg',
+  'images/06.jpg',
+  'images/07.jpg',
+  'images/08.jpg',
+  'images/09.jpg',
+  'images/10.jpg',
+  'images/11.jpg',
+  'images/12.jpg'
+];
+
+let current = 0;
+
+function artwork(i) {
+  const m = months[i];
+
+  return `
+    <div class="art">
+      <img
+        src="${images[i]}"
+        alt="${m[0]} 달력 그림"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      >
+
+      <div
+        class="placeholder"
+        style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;"
+      >
+        <strong>${m[1].toUpperCase()}</strong>
+        <p>${m[0]}</p>
+        <small>이미지 파일을 연결해 주세요</small>
+      </div>
+    </div>
+  `;
 }
-const gallery=document.getElementById('gallery');
-months.forEach((m,i)=>{
-const card=document.createElement('article');
-card.className='card';
-card.innerHTML=artwork(i)+`<div class="caption">${m[0]}　·　MONTHLY IMAGE</div>`;
-card.onclick=()=>openModal(i);
-gallery.appendChild(card);
+
+const gallery = document.getElementById('gallery');
+
+months.forEach((m, i) => {
+  const card = document.createElement('article');
+  card.className = 'card';
+
+  card.innerHTML = artwork(i) +
+    `<div class="caption">${m[0]} · MONTHLY IMAGE</div>`;
+
+  card.onclick = () => openModal(i);
+  gallery.appendChild(card);
 });
-function openModal(i){
-current=i;
-document.getElementById('large').innerHTML=artwork(i);
-document.getElementById('modal').classList.add('show');
+
+function openModal(i) {
+  current = i;
+  document.getElementById('large').innerHTML = artwork(i);
+  document.getElementById('modal').classList.add('show');
 }
-function closeModal(){
-document.getElementById('modal').classList.remove('show');
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
 }
-function change(n){
-current=(current+n+months.length)%months.length;
-document.getElementById('large').innerHTML=artwork(current);
+
+function change(n) {
+  current = (current + n + months.length) % months.length;
+  document.getElementById('large').innerHTML = artwork(current);
 }
-document.addEventListener('keydown',e=>{
-if(e.key==='Escape')closeModal();
-if(e.key==='ArrowLeft')change(-1);
-if(e.key==='ArrowRight')change(1);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+
+  if (document.getElementById('modal').classList.contains('show')) {
+    if (e.key === 'ArrowLeft') change(-1);
+    if (e.key === 'ArrowRight') change(1);
+  }
 });
 </script>
+
 </body>
 </html>
