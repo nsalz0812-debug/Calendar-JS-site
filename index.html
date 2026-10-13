@@ -7,9 +7,7 @@
 <title>紫霞雪影 · 2027 冊曆</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -26,17 +24,12 @@ body {
   justify-content: center;
   text-align: center;
   padding: 24px;
-  background: linear-gradient(135deg, #f8f4eb, #fffdf8, #f0ece2);
+  background: linear-gradient(135deg,#f8f4eb,#fffdf8,#f0ece2);
   border: 12px double #d9c7a5;
 }
 
-.cover small {
-  letter-spacing: 5px;
-  color: #a49a87;
-}
-
 .cover h1 {
-  font-size: clamp(38px, 10vw, 70px);
+  font-size: clamp(38px,10vw,70px);
   letter-spacing: 8px;
   margin: 28px 0 10px;
 }
@@ -75,10 +68,10 @@ h2 {
   line-height: 1.8;
 }
 
-/* 가로형 그림: 한 줄에 하나씩 */
+/* 달력: 한 줄에 하나 */
 .gallery {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0,1fr);
   gap: 30px;
   margin-top: 28px;
 }
@@ -94,15 +87,11 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  border: 1px solid #e5dfd2;
-  padding: 12px;
-  text-align: center;
   overflow: hidden;
+  border: 1px solid #e5dfd2;
   background: #f0ece2;
 }
 
-/* 실제 그림 이미지 */
 .art img {
   display: block;
   width: 100%;
@@ -110,20 +99,23 @@ h2 {
   object-fit: contain;
 }
 
-.art .symbol {
-  font-size: clamp(42px, 9vw, 90px);
-  margin: 12px 0;
+.placeholder {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #777568;
 }
 
-.art small {
-  letter-spacing: 2px;
-  font-size: 9px;
-}
-
-.art strong {
-  font-size: clamp(15px, 3vw, 25px);
+.placeholder strong {
+  font-size: clamp(15px,3vw,25px);
   font-weight: 400;
   letter-spacing: 2px;
+}
+
+.placeholder small {
+  font-size: 10px;
 }
 
 .caption {
@@ -132,7 +124,6 @@ h2 {
   font-size: 13px;
 }
 
-/* 그림을 넣기 전 샘플 배경 */
 .card:nth-child(6n+1) .art { background: #d7e1d0; }
 .card:nth-child(6n+2) .art { background: #e9d7d2; }
 .card:nth-child(6n+3) .art { background: #d9e5e5; }
@@ -140,12 +131,54 @@ h2 {
 .card:nth-child(6n+5) .art { background: #e2e5c9; }
 .card:nth-child(6n) .art { background: #d5e2e9; }
 
+/* 특전: 한 줄에 두 개, 정사각형 */
 .bonus {
   margin-top: 60px;
   padding: 30px 0;
   border-top: 1px solid #e5dfd2;
 }
 
+.bonus-gallery {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.bonus-card {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.bonus-art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid #e5dfd2;
+  background: #f0ece2;
+}
+
+.bonus-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bonus-caption {
+  padding: 8px 2px;
+  color: #777568;
+  font-size: 12px;
+}
+
+.bonus-card:nth-child(6n+1) .bonus-art { background: #d7e1d0; }
+.bonus-card:nth-child(6n+2) .bonus-art { background: #e9d7d2; }
+.bonus-card:nth-child(6n+3) .bonus-art { background: #d9e5e5; }
+.bonus-card:nth-child(6n+4) .bonus-art { background: #ead7b9; }
+.bonus-card:nth-child(6n+5) .bonus-art { background: #e2e5c9; }
+.bonus-card:nth-child(6n) .bonus-art { background: #d5e2e9; }
+
+/* 사진 확대 창 */
 #modal {
   display: none;
   position: fixed;
@@ -157,12 +190,10 @@ h2 {
   padding: 16px;
 }
 
-#modal.show {
-  display: flex;
-}
+#modal.show { display: flex; }
 
 .modalbox {
-  width: min(100%, 900px);
+  width: min(100%,900px);
   max-height: 95svh;
   overflow-y: auto;
   padding: 16px;
@@ -171,10 +202,20 @@ h2 {
 }
 
 .modalbox .art {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  min-height: 0;
   max-height: 72svh;
+}
+
+.modalbox .bonus-large {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 72svh;
+  overflow: hidden;
+}
+
+.modalbox .bonus-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .modalbox button {
@@ -192,22 +233,12 @@ footer {
   font-size: 11px;
 }
 
-@media (max-width: 560px) {
-  main {
-    padding: 24px 14px;
-  }
-
-  .cover {
-    border-width: 6px;
-  }
-
-  .gallery {
-    gap: 22px;
-  }
-
-  .modalbox {
-    padding: 10px;
-  }
+@media (max-width:560px) {
+  main { padding: 24px 14px; }
+  .cover { border-width: 6px; }
+  .gallery { gap: 22px; }
+  .bonus-gallery { gap: 12px; }
+  .modalbox { padding: 10px; }
 }
 </style>
 </head>
@@ -242,18 +273,20 @@ footer {
   <section class="bonus" id="bonus">
     <p>SPECIAL BENEFIT</p>
     <h2>특전 페이지</h2>
-    <p class="intro">특전 샘플을 준비하면 이곳에서 확인할 수 있습니다.</p>
+    <p class="intro">
+      자하설영 2027 달력 특전 미리보기입니다.<br>
+      사진을 누르면 크게 볼 수 있어요.
+    </p>
+
+    <div class="bonus-gallery" id="bonusGallery"></div>
   </section>
 
-  <footer>
-    PREVIEW ONLY 
-  </footer>
+  <footer>PREVIEW ONLY</footer>
 </main>
 
 <div id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modalbox">
     <div id="large"></div>
-
     <button onclick="change(-1)">← 이전</button>
     <button onclick="closeModal()">닫기</button>
     <button onclick="change(1)">다음 →</button>
@@ -261,29 +294,26 @@ footer {
 </div>
 
 <script>
-
+/* 표지 + 1월부터 12월까지 */
 const months = [
-  ['표지', 'COVER'],
-  ['1월', 'January'],
-  ['2월', 'February'],
-  ['3월', 'March'],
-  ['4월', 'April'],
-  ['5월', 'May'],
-  ['6월', 'June'],
-  ['7월', 'July'],
-  ['8월', 'August'],
-  ['9월', 'September'],
-  ['10월', 'October'],
-  ['11월', 'November'],
-  ['12월', 'December']
+  ['표지','COVER'],
+  ['1월','January'],
+  ['2월','February'],
+  ['3월','March'],
+  ['4월','April'],
+  ['5월','May'],
+  ['6월','June'],
+  ['7월','July'],
+  ['8월','August'],
+  ['9월','September'],
+  ['10월','October'],
+  ['11월','November'],
+  ['12월','December']
 ];
 
-/*
-  실제 그림 파일명을 여기에 연결하세요.
-  예: images/01.jpg
-  파일이 없으면 샘플 안내 화면이 표시됩니다.
-*/
+/* 달력 이미지 13개 */
 const images = [
+  'images/cover.jpg',
   'images/01.jpg',
   'images/02.jpg',
   'images/03.jpg',
@@ -298,7 +328,20 @@ const images = [
   'images/12.jpg'
 ];
 
+/* 특전 이미지 8개 */
+const bonusImages = [
+  'images/bonus01.jpg',
+  'images/bonus02.jpg',
+  'images/bonus03.jpg',
+  'images/bonus04.jpg',
+  'images/bonus05.jpg',
+  'images/bonus06.jpg',
+  'images/bonus07.jpg',
+  'images/bonus08.jpg'
+];
+
 let current = 0;
+let currentType = 'calendar';
 
 function artwork(i) {
   const m = months[i];
@@ -310,12 +353,8 @@ function artwork(i) {
         alt="${m[0]} 달력 그림"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
       >
-
-      <div
-        class="placeholder"
-        style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;"
-      >
-        <strong>${m[1].toUpperCase()}</strong>
+      <div class="placeholder" style="display:none">
+        <strong>${m[1]}</strong>
         <p>${m[0]}</p>
         <small>이미지 파일을 연결해 주세요</small>
       </div>
@@ -323,6 +362,7 @@ function artwork(i) {
   `;
 }
 
+/* 달력 페이지 만들기 */
 const gallery = document.getElementById('gallery');
 
 months.forEach((m, i) => {
@@ -330,25 +370,76 @@ months.forEach((m, i) => {
   card.className = 'card';
 
   card.innerHTML = artwork(i) +
-    `<div class="caption">${m[0]} · MONTHLY IMAGE</div>`;
+    `<div class="caption">${
+      i === 0 ? '달력 표지 · COVER IMAGE' : m[0] + ' · MONTHLY IMAGE'
+    }</div>`;
 
-  card.onclick = () => openModal(i);
+  card.onclick = () => openCalendar(i);
   gallery.appendChild(card);
 });
 
-function openModal(i) {
+/* 특전 페이지 만들기 */
+const bonusGallery = document.getElementById('bonusGallery');
+
+bonusImages.forEach((src, i) => {
+  const card = document.createElement('article');
+  card.className = 'bonus-card';
+
+  card.innerHTML = `
+    <div class="bonus-art">
+      <img
+        src="${src}"
+        alt="특전 ${i + 1}"
+        onerror="this.style.display='none'"
+      >
+    </div>
+    <div class="bonus-caption">
+      SPECIAL BENEFIT · ${String(i + 1).padStart(2,'0')}
+    </div>
+  `;
+
+  card.onclick = () => openBonus(i);
+  bonusGallery.appendChild(card);
+});
+
+/* 달력 확대 */
+function openCalendar(i) {
   current = i;
+  currentType = 'calendar';
   document.getElementById('large').innerHTML = artwork(i);
   document.getElementById('modal').classList.add('show');
 }
 
-function closeModal() {
-  document.getElementById('modal').classList.remove('show');
+/* 특전 확대 */
+function openBonus(i) {
+  current = i;
+  currentType = 'bonus';
+  showBonus(i);
+  document.getElementById('modal').classList.add('show');
 }
 
+function showBonus(i) {
+  document.getElementById('large').innerHTML = `
+    <div class="bonus-large">
+      <img src="${bonusImages[i]}" alt="특전 ${i + 1}">
+    </div>
+    <p>SPECIAL BENEFIT · ${String(i + 1).padStart(2,'0')}</p>
+  `;
+}
+
+/* 이전 / 다음 */
 function change(n) {
-  current = (current + n + months.length) % months.length;
-  document.getElementById('large').innerHTML = artwork(current);
+  if (currentType === 'calendar') {
+    current = (current + n + months.length) % months.length;
+    document.getElementById('large').innerHTML = artwork(current);
+  } else {
+    current = (current + n + bonusImages.length) % bonusImages.length;
+    showBonus(current);
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
 }
 
 document.addEventListener('keydown', e => {
