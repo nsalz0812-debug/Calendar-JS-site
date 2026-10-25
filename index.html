@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -295,7 +295,10 @@ footer {
 </div>
 
 <script>
-/* 표지 + 1월부터 12월까지 */
+/* =====================================
+   달력 표지 + 1월부터 12월까지
+===================================== */
+
 const months = [
   ['표지','COVER'],
   ['1월','January'],
@@ -329,6 +332,28 @@ const images = [
   'images/12.PNG'
 ];
 
+/* 달력 페이지별 작가님 이름
+   표지 문구와 월별 이름을 원하는 대로 수정하세요. */
+const captions = [
+  '달력 표지 · COVER IMAGE',
+  '1월 · ㅇㅇ님',
+  '2월 · ㄴㄴ님',
+  '3월 · ㅇㅇ님',
+  '4월 · ㅇㅇ님',
+  '5월 · ㅇㅇ님',
+  '6월 · ㅇㅇ님',
+  '7월 · ㅇㅇ님',
+  '8월 · ㅇㅇ님',
+  '9월 · ㅇㅇ님',
+  '10월 · ㅇㅇ님',
+  '11월 · ㅇㅇ님',
+  '12월 · ㅇㅇ님'
+];
+
+/* =====================================
+   특전 이미지와 표시 문구
+===================================== */
+
 /* 특전 이미지 8개 */
 const bonusImages = [
   'images/bonus01.jpg',
@@ -341,9 +366,25 @@ const bonusImages = [
   'images/bonus08.jpg'
 ];
 
+/*
+  특전 종류와 작가님 이름을 여기서 수정하세요.
+  예: '포토카드 · 홍길동님'
+*/
+const bonusCaptions = [
+  '포토카드 · ㅇㅇ님',
+  '엽서 · ㄴㄴ님',
+  '스티커 · ㅇㅇ님',
+  '책갈피 · ㄴㄴ님',
+  '아크릴 키링 · ㅇㅇ님',
+  '포스터 · ㄴㄴ님',
+  '일러스트 카드 · ㅇㅇ님',
+  '특전 · ㄴㄴ님'
+];
+
 let current = 0;
 let currentType = 'calendar';
 
+/* 달력 이미지 표시 */
 function artwork(i) {
   const m = months[i];
 
@@ -371,9 +412,7 @@ months.forEach((m, i) => {
   card.className = 'card';
 
   card.innerHTML = artwork(i) +
-    `<div class="caption">${
-      i === 0 ? '달력 표지 · COVER IMAGE' : m[0] + ' · MONTHLY IMAGE'
-    }</div>`;
+    `<div class="caption">${captions[i]}</div>`;
 
   card.onclick = () => openCalendar(i);
   gallery.appendChild(card);
@@ -395,7 +434,7 @@ bonusImages.forEach((src, i) => {
       >
     </div>
     <div class="bonus-caption">
-      SPECIAL BENEFIT · ${String(i + 1).padStart(2,'0')}
+      ${bonusCaptions[i]}
     </div>
   `;
 
@@ -419,12 +458,13 @@ function openBonus(i) {
   document.getElementById('modal').classList.add('show');
 }
 
+/* 확대 화면에도 특전 종류와 작가님 표시 */
 function showBonus(i) {
   document.getElementById('large').innerHTML = `
     <div class="bonus-large">
       <img src="${bonusImages[i]}" alt="특전 ${i + 1}">
     </div>
-    <p>SPECIAL BENEFIT · ${String(i + 1).padStart(2,'0')}</p>
+    <p>${bonusCaptions[i]}</p>
   `;
 }
 
@@ -455,3 +495,4 @@ document.addEventListener('keydown', e => {
 
 </body>
 </html>
+```
